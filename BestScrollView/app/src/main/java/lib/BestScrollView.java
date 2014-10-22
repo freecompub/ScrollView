@@ -29,8 +29,11 @@ public class BestScrollView extends ScrollView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         for (OnScrollChangedListener listner : hScrollListener) {
-            listner.onVerticalScrollChanged(t);
-            listner.onScrollChanged(l, t, oldl, oldt);
+            if (listner!=null){
+                listner.onVerticalScrollChanged(this,t);
+                listner.onScrollChanged(this,l, t, oldl, oldt);
+            }
+
         }
     }
 
@@ -41,8 +44,11 @@ public class BestScrollView extends ScrollView {
 
             @Override
             public void run() {
-                for (OnScrollChangedListener oscl : hScrollListener) {
-                    oscl.onVerticalScrollChanged(getScrollY());
+                for (OnScrollChangedListener listner : hScrollListener) {
+                    if (listner!=null){
+                        listner.onVerticalScrollChanged(BestScrollView.this,getScrollY());
+                    }
+
                 }
                 invalidate();
             }
@@ -55,9 +61,8 @@ public class BestScrollView extends ScrollView {
     }
 
     public static interface OnScrollChangedListener {
-        public void onVerticalScrollChanged(int offsetY);
-
-        public void onScrollChanged(int x, int y, int oldx, int oldy);
+        public void onVerticalScrollChanged(ScrollView view ,int offsetY);
+        public void onScrollChanged(ScrollView view,int x, int y, int oldx, int oldy);
     }
 
 
