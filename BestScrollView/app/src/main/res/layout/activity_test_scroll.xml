@@ -174,4 +174,14 @@
 
     </lib.BestScrollView>
 
+
+   <TextView
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/information"
+       android:text="none"
+       android:gravity="center"
+       android:textSize="24sp"/>
+
+
 </RelativeLayout>

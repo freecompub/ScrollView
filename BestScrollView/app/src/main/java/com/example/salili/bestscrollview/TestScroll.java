@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -14,11 +15,14 @@ import lib.SynchroLayout;
 
 public class TestScroll extends ActionBarActivity implements SynchroLayout.OnViewsVisibilityListner {
 
+    private TextView data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_scroll);
         ((SynchroLayout) findViewById(R.id.container)).addListner(this);
+        data =(TextView)findViewById(R.id.information);
     }
 
 
@@ -50,7 +54,7 @@ public class TestScroll extends ActionBarActivity implements SynchroLayout.OnVie
             } else
                 message = message+visibleChild.get(i).getTag() + ",";
         }
-
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        data.setText(message);
+        //Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
