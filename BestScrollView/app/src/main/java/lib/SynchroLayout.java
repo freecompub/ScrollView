@@ -3,10 +3,9 @@ package lib;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-
-import com.example.salili.bestscrollview.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +46,22 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
         }
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        findScrollView(getParent());
+    }
+
+    private void findScrollView(ViewParent parent) {
+        if (parent == null) {
+            throw new IllegalArgumentException("A SynchroLayout must be inside BestScrollView, directly.");
+        }
+
+        if (parent instanceof BestScrollView) {
+            ((BestScrollView) parent).addOnScrollListener(this);
+        }
+    }
+
     public interface OnViewsVisibilityListner {
         public void onChildViewVible(List<View> visibleChild);
     }
@@ -62,7 +77,7 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
             View view = this.getChildAt(i);
             view.getLocationOnScreen(location);
 
-            if ((location[1] >= 0 && location[0] < scrollView.getHeight()) ||
+            if ((location[1] >= 0 && location[1] < scrollView.getHeight()) ||
                     (location[1] < 0 && (location[1] + view.getHeight()) > 0)
                     ) {
                 tmp.add(view);

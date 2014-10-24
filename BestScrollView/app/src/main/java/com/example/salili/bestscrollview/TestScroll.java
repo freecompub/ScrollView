@@ -1,17 +1,24 @@
 package com.example.salili.bestscrollview;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import java.util.List;
+
+import lib.SynchroLayout;
 
 
-public class TestScroll extends ActionBarActivity {
+public class TestScroll extends ActionBarActivity implements SynchroLayout.OnViewsVisibilityListner {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_scroll);
+        ((SynchroLayout) findViewById(R.id.container)).addListner(this);
     }
 
 
@@ -32,5 +39,18 @@ public class TestScroll extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onChildViewVible(final List<View> visibleChild) {
+        String message = "";
+        for (int i = 0; i < visibleChild.size(); i++) {
+            if (i == visibleChild.size() - 1) {
+                message = message + visibleChild.get(i).getTag();
+            } else
+                message = message+visibleChild.get(i).getTag() + ",";
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
