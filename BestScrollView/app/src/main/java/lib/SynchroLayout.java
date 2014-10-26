@@ -62,23 +62,21 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
         }
     }
 
-    public interface OnViewsVisibilityListner {
-        public void onChildViewVible(List<View> visibleChild);
-    }
-
     public void addListner(OnViewsVisibilityListner mListner) {
         mListners.add(mListner);
     }
 
     public ArrayList<View> getVisibleViews(ScrollView scrollView) {
         ArrayList<View> tmp = new ArrayList<View>();
+        int[] position = {0, 0};
+        scrollView.getLocationOnScreen(position);
         for (int i = 0; i < this.getChildCount(); i++) {
             int[] location = {0, 0};
             View view = this.getChildAt(i);
             view.getLocationOnScreen(location);
 
-            if ((location[1] >= 0 && location[1] < scrollView.getHeight()) ||
-                    (location[1] < 0 && (location[1] + view.getHeight()) > 0)
+            if ((location[1] >= position[1] && location[1] < (scrollView.getHeight() + position[1])) ||
+                    (location[1] < position[1] && (location[1] + view.getHeight()) > position[1])
                     ) {
                 tmp.add(view);
             }
@@ -92,5 +90,9 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
             return false;
 
         return visibleViews.contains(view);
+    }
+
+    public interface OnViewsVisibilityListner {
+        public void onChildViewVible(List<View> visibleChild);
     }
 }

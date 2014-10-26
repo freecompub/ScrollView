@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -23,6 +22,7 @@ public class TestScroll extends ActionBarActivity implements SynchroLayout.OnVie
         setContentView(R.layout.activity_test_scroll);
         ((SynchroLayout) findViewById(R.id.container)).addListner(this);
         data =(TextView)findViewById(R.id.information);
+        getActionBar().hide();
     }
 
 

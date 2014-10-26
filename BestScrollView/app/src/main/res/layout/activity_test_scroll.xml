@@ -15,17 +15,17 @@
 
 
         <lib.SynchroLayout
+            android:id="@+id/container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#ff151bff"
-            android:orientation="vertical"
-            android:id="@+id/container">
+            android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/n1"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
                 android:background="#f2ff7809"
-                android:id="@+id/n1"
                 android:tag="n1">
 
                 <TextView
@@ -38,11 +38,11 @@
 
 
             <RelativeLayout
+                android:id="@+id/n2"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n2"
+                android:background="#f2ff7809"
                 android:tag="n2">
 
                 <TextView
@@ -55,11 +55,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/n3"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n3"
+                android:background="#f2ff7809"
                 android:tag="n3">
 
                 <TextView
@@ -72,11 +72,11 @@
 
 
             <RelativeLayout
+                android:id="@+id/n4"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n4"
+                android:background="#f2ff7809"
                 android:tag="n4">
 
                 <TextView
@@ -89,11 +89,11 @@
 
 
             <RelativeLayout
+                android:id="@+id/n5"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n5"
+                android:background="#f2ff7809"
                 android:tag="n5">
 
                 <TextView
@@ -105,11 +105,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/n6"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n6"
+                android:background="#f2ff7809"
                 android:tag="n6">
 
                 <TextView
@@ -122,14 +122,14 @@
 
 
             <RelativeLayout
+                android:id="@+id/n7"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n7"
-                android:tag="n8">
+                android:background="#f2ff7809"
+                android:tag="n7">
 
-                <TextView
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -138,11 +138,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/n8"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n8"
+                android:background="#f2ff7809"
                 android:tag="n8">
 
                 <TextView
@@ -154,11 +154,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/n9"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
-                android:background="#f2ff7809"
                 android:layout_marginTop="15dp"
-                android:id="@+id/n9"
+                android:background="#f2ff7809"
                 android:tag="n9">
 
                 <TextView
@@ -176,11 +176,11 @@
 
 
    <TextView
+       android:id="@+id/information"
        android:layout_width="fill_parent"
        android:layout_height="wrap_content"
-       android:id="@+id/information"
-       android:text="none"
        android:gravity="center"
+       android:text="none"
        android:textSize="24sp"/>
 
 
