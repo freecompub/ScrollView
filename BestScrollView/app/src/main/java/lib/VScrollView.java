@@ -2,6 +2,7 @@ package lib;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 
 import java.util.ArrayList;
@@ -9,26 +10,26 @@ import java.util.ArrayList;
 /**
  * Created by SALILI on 22/10/2014.
  */
-public class BestScrollView extends ScrollView {
+public class VScrollView extends ScrollView {
 
-    private ArrayList<OnScrollChangedListener> hScrollListener = new ArrayList<OnScrollChangedListener>();
+    private ArrayList<OnScrollChangedListener> vScrollListener = new ArrayList<OnScrollChangedListener>();
 
-    public BestScrollView(final Context context) {
+    public VScrollView(final Context context) {
         super(context);
     }
 
-    public BestScrollView(final Context context, final AttributeSet attrs) {
+    public VScrollView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public BestScrollView(final Context context, final AttributeSet attrs, final int defStyle) {
+    public VScrollView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-        for (OnScrollChangedListener listner : hScrollListener) {
+        for (OnScrollChangedListener listner : vScrollListener) {
             if (listner!=null){
                 listner.onVerticalScrollChanged(this,t);
                 listner.onScrollChanged(this,l, t, oldl, oldt);
@@ -44,9 +45,9 @@ public class BestScrollView extends ScrollView {
 
             @Override
             public void run() {
-                for (OnScrollChangedListener listner : hScrollListener) {
+                for (OnScrollChangedListener listner : vScrollListener) {
                     if (listner!=null){
-                        listner.onVerticalScrollChanged(BestScrollView.this,getScrollY());
+                        listner.onVerticalScrollChanged(VScrollView.this, getScrollY());
                     }
 
                 }
@@ -57,12 +58,16 @@ public class BestScrollView extends ScrollView {
 
 
     public void addOnScrollListener(OnScrollChangedListener onScrollListener) {
-        this.hScrollListener.add(onScrollListener);
+        this.vScrollListener.add(onScrollListener);
     }
 
     public static interface OnScrollChangedListener {
         public void onVerticalScrollChanged(ScrollView view ,int offsetY);
+
+        public void onHorizontalScrollChanged(HorizontalScrollView view, int offsetX);
         public void onScrollChanged(ScrollView view,int x, int y, int oldx, int oldy);
+
+        public void onScrollChanged(HorizontalScrollView view, int x, int y, int oldx, int oldy);
     }
 
 

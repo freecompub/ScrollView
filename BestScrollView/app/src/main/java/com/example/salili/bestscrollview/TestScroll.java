@@ -21,8 +21,8 @@ public class TestScroll extends ActionBarActivity implements SynchroLayout.OnVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_scroll);
         ((SynchroLayout) findViewById(R.id.container)).addListner(this);
-        data =(TextView)findViewById(R.id.information);
-        getActionBar().hide();
+        data = (TextView) findViewById(R.id.information);
+
     }
 
 
@@ -52,7 +52,7 @@ public class TestScroll extends ActionBarActivity implements SynchroLayout.OnVie
             if (i == visibleChild.size() - 1) {
                 message = message + visibleChild.get(i).getTag();
             } else
-                message = message+visibleChild.get(i).getTag() + ",";
+                message = message + visibleChild.get(i).getTag() + ",";
         }
         data.setText(message);
         //Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

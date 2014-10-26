@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewParent;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -13,10 +14,12 @@ import java.util.List;
 /**
  * Created by alili on 22/10/14.
  */
-public class SynchroLayout extends LinearLayout implements BestScrollView.OnScrollChangedListener {
+public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollChangedListener {
 
     private ArrayList<OnViewsVisibilityListner> mListners = new ArrayList<OnViewsVisibilityListner>();
-    private ArrayList<View> visibleViews;
+    private ArrayList<View> VerticalVisibleViews = new ArrayList<View>();
+    private ArrayList<View> VerticalHorizontalViews = new ArrayList<View>();
+
 
     public SynchroLayout(Context context) {
         super(context);
@@ -37,13 +40,23 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
     }
 
     @Override
+    public void onHorizontalScrollChanged(HorizontalScrollView view, int offsetX) {
+
+    }
+
+    @Override
     public void onScrollChanged(ScrollView view, int x, int y, int oldx, int oldy) {
-        visibleViews = getVisibleViews(view);
+        VerticalVisibleViews = getVisibleViewsForVerticalScroll(view);
         for (OnViewsVisibilityListner listner : mListners) {
             if (listner != null) {
-                listner.onChildViewVible(visibleViews);
+                listner.onChildViewVible(VerticalVisibleViews);
             }
         }
+    }
+
+    @Override
+    public void onScrollChanged(HorizontalScrollView view, int x, int y, int oldx, int oldy) {
+
     }
 
     @Override
@@ -57,8 +70,8 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
             throw new IllegalArgumentException("A SynchroLayout must be inside BestScrollView, directly.");
         }
 
-        if (parent instanceof BestScrollView) {
-            ((BestScrollView) parent).addOnScrollListener(this);
+        if (parent instanceof VScrollView) {
+            ((VScrollView) parent).addOnScrollListener(this);
         }
     }
 
@@ -66,7 +79,7 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
         mListners.add(mListner);
     }
 
-    public ArrayList<View> getVisibleViews(ScrollView scrollView) {
+    public ArrayList<View> getVisibleViewsForVerticalScroll(ScrollView scrollView) {
         ArrayList<View> tmp = new ArrayList<View>();
         int[] position = {0, 0};
         scrollView.getLocationOnScreen(position);
@@ -84,15 +97,45 @@ public class SynchroLayout extends LinearLayout implements BestScrollView.OnScro
         return tmp;
     }
 
+
+    public ArrayList<View> getVisibleViewsForHorizontalScroll(ScrollView scrollView) {
+        ArrayList<View> tmp = new ArrayList<View>();
+        int[] position = {0, 0};
+        scrollView.getLocationOnScreen(position);
+        for (int i = 0; i < this.getChildCount(); i++) {
+            int[] location = {0, 0};
+            View view = this.getChildAt(i);
+            view.getLocationOnScreen(location);
+
+            if ((location[0] >= position[0] && location[0] < (scrollView.getHeight() + position[0])) ||
+                    (location[0] < position[0] && (location[0] + view.getHeight()) > position[0])
+                    ) {
+                tmp.add(view);
+            }
+        }
+        return tmp;
+    }
+
+
     public boolean isViewVisible(int id) {
         View view = this.findViewById(id);
         if (view == null)
             return false;
 
-        return visibleViews.contains(view);
+        return VerticalVisibleViews.contains(view);
     }
+
+    public enum ViewStatus {
+        GO_IN,
+        IN,
+        GO_OUT,
+        OUT;
+    }
+
 
     public interface OnViewsVisibilityListner {
         public void onChildViewVible(List<View> visibleChild);
     }
+
+    ;
 }
