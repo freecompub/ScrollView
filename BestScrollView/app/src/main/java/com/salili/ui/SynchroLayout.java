@@ -1,4 +1,4 @@
-package lib;
+package com.salili.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -72,6 +72,10 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
 
         if (parent instanceof VScrollView) {
             ((VScrollView) parent).addOnScrollListener(this);
+        }
+
+        if (parent instanceof HScrollView) {
+            ((HScrollView) parent).addOnScrollListener(this);
         }
     }
 

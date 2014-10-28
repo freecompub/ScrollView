@@ -1,4 +1,4 @@
-package lib;
+package com.salili.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
