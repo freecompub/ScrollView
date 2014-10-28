@@ -21,14 +21,32 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
     private ArrayList<View> horizontalVisibleViews = new ArrayList<View>();
 
 
+    /**
+     * Instantiates a new Synchro layout.
+     *
+     * @param context the context
+     */
     public SynchroLayout(Context context) {
         super(context);
     }
 
+    /**
+     * Instantiates a new Synchro layout.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public SynchroLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+    /**
+     * Instantiates a new Synchro layout.
+     *
+     * @param context  the context
+     * @param attrs    the attrs
+     * @param defStyle the def style
+     */
     public SynchroLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
@@ -84,10 +102,21 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
         }
     }
 
+    /**
+     * Add listner.
+     *
+     * @param mListner the m listner
+     */
     public void addListner(OnViewsVisibilityListner mListner) {
         mListners.add(mListner);
     }
 
+    /**
+     * Gets visible views for vertical scroll.
+     *
+     * @param scrollView the scroll view
+     * @return the visible views for vertical scroll
+     */
     public ArrayList<View> getVisibleViewsForVerticalScroll(ScrollView scrollView) {
         ArrayList<View> tmp = new ArrayList<View>();
         int[] position = {0, 0};
@@ -113,6 +142,12 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
     }
 
 
+    /**
+     * Gets visible views for horizontal scroll.
+     *
+     * @param scrollView the scroll view
+     * @return the visible views for horizontal scroll
+     */
     public ArrayList<View> getVisibleViewsForHorizontalScroll(HorizontalScrollView scrollView) {
         ArrayList<View> tmp = new ArrayList<View>();
         int[] position = {0, 0};
@@ -137,6 +172,12 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
     }
 
 
+    /**
+     * Is view visible.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     public boolean isViewVisible(int id) {
         View view = this.findViewById(id);
         if (view == null)
@@ -145,17 +186,40 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
         return verticalVisibleViews.contains(view);
     }
 
+    /**
+     * The enum View status.
+     */
     public enum ViewStatus {
+        /**
+         * The GO_IN.
+         */
         GO_IN,
+        /**
+         * The IN.
+         */
         IN,
+        /**
+         * The GO_OUT.
+         */
         GO_OUT,
+        /**
+         * The OUT.
+         */
         OUT;
     }
 
 
+    /**
+     * The interface On views visibility listner.
+     */
     public interface OnViewsVisibilityListner {
+        /**
+         * On child view vible.
+         *
+         * @param visibleChild the visible child
+         */
         public void onChildViewVible(List<View> visibleChild);
     }
 
-    ;
+
 }
