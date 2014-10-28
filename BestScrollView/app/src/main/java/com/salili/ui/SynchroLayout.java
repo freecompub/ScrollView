@@ -17,8 +17,8 @@ import java.util.List;
 public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollChangedListener {
 
     private ArrayList<OnViewsVisibilityListner> mListners = new ArrayList<OnViewsVisibilityListner>();
-    private ArrayList<View> VerticalVisibleViews = new ArrayList<View>();
-    private ArrayList<View> VerticalHorizontalViews = new ArrayList<View>();
+    private ArrayList<View> verticalVisibleViews = new ArrayList<View>();
+    private ArrayList<View> horizontalVisibleViews = new ArrayList<View>();
 
 
     public SynchroLayout(Context context) {
@@ -46,17 +46,22 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
 
     @Override
     public void onScrollChanged(ScrollView view, int x, int y, int oldx, int oldy) {
-        VerticalVisibleViews = getVisibleViewsForVerticalScroll(view);
+        verticalVisibleViews = getVisibleViewsForVerticalScroll(view);
         for (OnViewsVisibilityListner listner : mListners) {
             if (listner != null) {
-                listner.onChildViewVible(VerticalVisibleViews);
+                listner.onChildViewVible(verticalVisibleViews);
             }
         }
     }
 
     @Override
     public void onScrollChanged(HorizontalScrollView view, int x, int y, int oldx, int oldy) {
-
+        horizontalVisibleViews = getVisibleViewsForHorizontalScroll(view);
+        for (OnViewsVisibilityListner listner : mListners) {
+            if (listner != null) {
+                listner.onChildViewVible(horizontalVisibleViews);
+            }
+        }
     }
 
     @Override
@@ -86,13 +91,19 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
     public ArrayList<View> getVisibleViewsForVerticalScroll(ScrollView scrollView) {
         ArrayList<View> tmp = new ArrayList<View>();
         int[] position = {0, 0};
+
+        int paddingTop = ((VScrollView) scrollView).getPaddingTop();
+        int paddingBottom = ((VScrollView) scrollView).getPaddingBottom();
+        int scrollViewHeight = scrollView.getHeight() - paddingBottom - paddingTop;
+
         scrollView.getLocationOnScreen(position);
+        position[1] = position[1] + paddingTop;
         for (int i = 0; i < this.getChildCount(); i++) {
             int[] location = {0, 0};
             View view = this.getChildAt(i);
             view.getLocationOnScreen(location);
 
-            if ((location[1] >= position[1] && location[1] < (scrollView.getHeight() + position[1])) ||
+            if ((location[1] >= position[1] && location[1] < (scrollViewHeight + position[1])) ||
                     (location[1] < position[1] && (location[1] + view.getHeight()) > position[1])
                     ) {
                 tmp.add(view);
@@ -102,17 +113,22 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
     }
 
 
-    public ArrayList<View> getVisibleViewsForHorizontalScroll(ScrollView scrollView) {
+    public ArrayList<View> getVisibleViewsForHorizontalScroll(HorizontalScrollView scrollView) {
         ArrayList<View> tmp = new ArrayList<View>();
         int[] position = {0, 0};
+
+        int paddingLeft = scrollView.getPaddingLeft();
+        int paddingRight = scrollView.getPaddingRight();
+        int scrollViewWidth = scrollView.getWidth() - paddingRight - paddingLeft;
         scrollView.getLocationOnScreen(position);
+        position[0] = position[0] + paddingLeft;
         for (int i = 0; i < this.getChildCount(); i++) {
             int[] location = {0, 0};
             View view = this.getChildAt(i);
             view.getLocationOnScreen(location);
 
-            if ((location[0] >= position[0] && location[0] < (scrollView.getHeight() + position[0])) ||
-                    (location[0] < position[0] && (location[0] + view.getHeight()) > position[0])
+            if ((location[0] >= position[0] && location[0] < (scrollViewWidth + position[0])) ||
+                    (location[0] < position[0] && (location[0] + view.getWidth()) > position[0])
                     ) {
                 tmp.add(view);
             }
@@ -126,7 +142,7 @@ public class SynchroLayout extends LinearLayout implements VScrollView.OnScrollC
         if (view == null)
             return false;
 
-        return VerticalVisibleViews.contains(view);
+        return verticalVisibleViews.contains(view);
     }
 
     public enum ViewStatus {

@@ -1,16 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
     >
 
     <com.salili.ui.HScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#fffd16bd"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        >
 
 
         <com.salili.ui.SynchroLayout
@@ -18,13 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:background="#ff151bff"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            android:orientation="horizontal">
 
-            <RelativeLayout
+        <RelativeLayout
                 android:id="@+id/n1"
                 android:layout_width="100dp"
                 android:layout_height="fill_parent"
