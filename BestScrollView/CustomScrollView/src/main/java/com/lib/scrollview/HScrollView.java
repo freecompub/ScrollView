@@ -39,7 +39,6 @@ public class HScrollView extends HorizontalScrollView {
         }
 
 
-
     }
 
     public HScrollView(Context context, AttributeSet attrs, int defStyle) {
