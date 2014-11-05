@@ -7,7 +7,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
     >
 
-    <com.salili.ui.HScrollView
+    <com.lib.scrollview.HScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#fffd16bd"
@@ -16,14 +16,14 @@
         >
 
 
-        <com.salili.ui.SynchroLayout
+        <com.lib.scrollview.SynchroLayout
             android:id="@+id/container"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:background="#ff151bff"
             android:orientation="horizontal">
 
-        <RelativeLayout
+            <RelativeLayout
                 android:id="@+id/n1"
                 android:layout_width="100dp"
                 android:layout_height="fill_parent"
@@ -171,9 +171,9 @@
             </RelativeLayout>
 
 
-        </com.salili.ui.SynchroLayout>
+        </com.lib.scrollview.SynchroLayout>
 
-    </com.salili.ui.HScrollView>
+    </com.lib.scrollview.HScrollView>
 
 
     <TextView

@@ -1,4 +1,4 @@
-package com.salili.ui;
+package com.lib.scrollview;
 
 import android.content.Context;
 import android.util.AttributeSet;

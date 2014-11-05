@@ -8,13 +8,14 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 tools:context=".TestScroll">
 
-    <com.salili.ui.VScrollView
+    <com.lib.scrollview.VScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:background="#fffd16bd">
 
 
-        <com.salili.ui.SynchroLayout
+        <com.lib.scrollview.SynchroLayout
             android:id="@+id/container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -169,9 +170,9 @@
             </RelativeLayout>
 
 
-        </com.salili.ui.SynchroLayout>
+        </com.lib.scrollview.SynchroLayout>
 
-    </com.salili.ui.VScrollView>
+    </com.lib.scrollview.VScrollView>
 
 
     <TextView

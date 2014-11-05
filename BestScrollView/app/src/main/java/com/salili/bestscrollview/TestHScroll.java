@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.salili.ui.SynchroLayout;
+import com.lib.scrollview.SynchroLayout;
 
 import java.util.List;
 
